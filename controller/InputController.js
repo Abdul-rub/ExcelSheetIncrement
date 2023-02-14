@@ -13,7 +13,7 @@ const getAllCalcData = async (req, res) => {
   return res.status(200).json();
 };
 
-//ADD BLOG  TO SPECIFIC ID
+//Post Input
 const PostInputData = async (req, res) => {
   const { input } = req.body;
 
@@ -27,10 +27,10 @@ if(valid){
 
 
 
-        // Split the input string into an array of substrings
+     
         var substrings = input.split(/([A-Z]+\d+)/);
         
-        // Iterate over the substrings and modify any cell references
+  
         for (var i = 0; i < substrings.length; i++) {
           var substring = substrings[i];
           if (/^[A-Z]+\d+$/.test(substring)) {
@@ -42,14 +42,13 @@ if(valid){
           }
         }
         
-        // Remove last argument "0" if present
+ 
         var lastSubstring = substrings[substrings.length - 1];
         if (lastSubstring === "0") {
           substrings.splice(substrings.length - 2, 2);
         }
         
         let result=substrings.join("")
-        // Join the substrings back into a single string and return it\
         let data = await InputModel.create({...req.body,output:result}) 
         return res.send(data);
       
